@@ -41,6 +41,28 @@ describe('MemoryCache', function () {
             clock.restore();
         });
 
+        it('LRU should keep data alive', function () {
+            var clock = sinon.useFakeTimers();
+
+            cache.set('key', 1, 100);
+            expect(cache.get('key')).to.equal(1);
+            clock.tick(50 * 1000);
+            expect(cache.get('key')).to.equal(1);
+            clock.tick(50 * 1000);
+            expect(cache.get('key')).to.equal(1);
+            clock.tick(50 * 1000);
+            expect(cache.get('key')).to.equal(1);
+            clock.tick(50 * 1000);
+            expect(cache.get('key')).to.equal(1);
+            clock.tick(50 * 1000);
+            expect(cache.get('key')).to.equal(1);
+
+            clock.tick(100 * 1000);
+            expect(cache.get('key')).to.not.exist;
+
+            clock.restore();
+        });
+
         describe('when expiration time is 0', function () {
             it('should not expire value', function () {
                 var clock = sinon.useFakeTimers();

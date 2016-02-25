@@ -1,24 +1,24 @@
-# fast-memory-cache [![Build Status](https://travis-ci.org/mdevils/fast-memory-cache.svg?branch=master)](https://travis-ci.org/mdevils/fast-memory-cache)
-
+# LRU-memory-cache
 Simple in-memory cache implementation for Node.js
+
 
 ## Installation
 
 ```
-npm install --save fast-memory-cache
+npm install --save LRU-memory-cache
 ```
 
 ## Usage example
 
 ```js
-var MemoryCache = require('fast-memory-cache');
+var MemoryCache = require('LRU-memory-cache');
 
 // Create cache
 var cache = new MemoryCache();
 
 // Get/set value
 var val = cache.get('key'); // undefined
-cache.set('key', 'value');
+cache.set('key', 'value', ttl);
 val = cache.get('key'); // 'value'
 
 // Delete value
@@ -29,7 +29,20 @@ val = cache.get('key'); // undefined
 cache.set('key', 'new-value', 1);
 setTimeout(function () {
     val = cache.get('key'); // undefined
-}, 2000);
+}, 1000);
+
+cache.set('key', 'new-value', 1);
+setTimeout(function () {
+    val = cache.get('key'); // new-value (exist)
+}, 900);
+
+setTimeout(function () {
+    val = cache.get('key'); // still exists
+}, 900);
+
+// each get move 'used' timestamp further. So TTL means time-from-last-use. LRU cache.
+
+
 ```
 
 ## Running tests

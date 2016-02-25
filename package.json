@@ -1,8 +1,8 @@
 {
-  "name": "fast-memory-cache",
-  "description": "Simple in-memory cache implementation",
-  "version": "2.0.4",
-  "author": "Konstantin Ikonnikov <ikokostya@gmail.com>",
+  "name": "lru-memory-cache",
+  "description": "Simple in-memory cache implementation with LRU",
+  "version": "1.0.0",
+  "author": "Anton Korzunov <thekashey@gmail.com>",
   "contributors": [
     {
       "name": "Dulin Marat",
@@ -11,12 +11,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mdevils/fast-memory-cache"
+    "url": "https://github.com/kashey/lru-memory-cache"
   },
-  "bugs": "https://github.com/mdevils/fast-memory-cache/issues",
+  "bugs": "https://github.com/kashey/lru-memory-cache/issues",
   "keywords": [
     "memory",
-    "cache"
+    "cache",
+    "lru"
   ],
   "main": "lib/memory-cache.js",
   "unit-coverage": {
